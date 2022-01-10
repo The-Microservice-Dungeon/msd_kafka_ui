@@ -8,9 +8,9 @@ services:
     env_file:
       - dev.env
     networks:
-      - kafka_net
+      - kafkaNet
 
 networks:
   kafka_net:
     external: true
-    name: kafka_net
+    name: kafkaNet
