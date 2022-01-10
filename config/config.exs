@@ -47,13 +47,7 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-[host, port] =
-  System.get_env("KAFKA_BOOTSTRAP_ADDRESS", "localhost:29092")
-  |> String.split(":")
-
 config :kafka_ui, :elsa,
-  endpoints: [{String.to_atom(host), String.to_integer(port)}],
-  name: :kafka_ui,
   group_consumer: [
     group: "game-events-ui",
     topics: ["gameworld-created", "spacestation-created", "playerStatus", "bank-created"],

@@ -1,0 +1,1 @@
+call "%~dp0\kafka_ui" eval KafkaUi.Release.migrate

@@ -60,8 +60,6 @@ COPY config/runtime.exs config/
 
 COPY rel rel
 COPY entrypoint.sh .
-COPY run.sh .
-COPY litestream.yml .
 RUN mix release
 
 # start a new build stage so that the final image will only contain
@@ -84,7 +82,6 @@ RUN chown nobody /app
 # Only copy the final release from the build stage
 COPY --from=builder --chown=nobody:root /app/_build/prod/rel/kafka_ui ./
 COPY --from=builder --chown=nobody:root /app/entrypoint.sh ./
-COPY --from=builder --chown=nobody:root /app/run.sh ./
 
 USER nobody
 

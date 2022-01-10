@@ -70,3 +70,11 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+[host, port] =
+  System.get_env("KAFKA_BOOTSTRAP_ADDRESS", "localhost:29092")
+  |> String.split(":")
+
+config :kafka_ui, :elsa,
+  endpoints: [{String.to_atom(host), String.to_integer(port)}],
+  name: :kafka_ui

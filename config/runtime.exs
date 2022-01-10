@@ -78,4 +78,12 @@ if config_env() == :prod do
   #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+
+  [host, port] =
+    System.get_env("KAFKA_BOOTSTRAP_ADDRESS", "kafkabroker:9092")
+    |> String.split(":")
+
+  config :kafka_ui, :elsa,
+    endpoints: [{String.to_atom(host), String.to_integer(port)}],
+    name: :kafka_ui
 end

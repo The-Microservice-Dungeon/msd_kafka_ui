@@ -32,7 +32,7 @@ defmodule KafkaUi.Application do
     {
       Elsa.Supervisor,
       endpoints: Application.get_env(:kafka_ui, :elsa)[:endpoints],
-      connection: :doom_reader,
+      connection: :kafka_ui_reader,
       group_consumer: Application.get_env(:kafka_ui, :elsa)[:group_consumer]
     }
   end

@@ -3,7 +3,7 @@ defmodule KafkaUi.Release do
   Used for executing DB release tasks when run in production without Mix
   installed.
   """
-  @app :doom
+  @app :kafka_ui
 
   def migrate do
     load_app()
