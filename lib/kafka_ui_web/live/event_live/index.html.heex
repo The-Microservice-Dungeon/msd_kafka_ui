@@ -1,0 +1,58 @@
+<h1 class="text-3xl font-bold text-yellow-400 my-4">Event List</h1>
+
+<%= if @live_action in [:payload]  do %>
+  <.modal return_to={Routes.event_index_path(@socket, :index)}>
+    <h2 class="my-4 text-xl text-yellow-400">Payload</h2>
+    <div class="h-80 overflow-auto text-xs font-mono">
+      <pre>
+        <code>
+          <%= Jason.Formatter.pretty_print(@payload) %>
+        </code>
+      </pre>
+    </div>
+  </.modal>
+<% end %>
+
+<%= for message <- @messages do %>
+  <div
+    class="relative my-4 bg-gray-900 block p-8 overflow-hidden border border-gray-100 rounded-lg"
+  >
+    <span
+      class="absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-yellow-300 via-blue-500 to-purple-600"
+    ></span>
+    <div class="justify-between flex">
+      <div>
+        <h5 class="text-xl font-bold text-gray-100">
+          <%= message.topic %>
+        </h5>
+        <p class="mt-1 text-xs font-medium text-gray-400"><%= message.headers["type"] %></p>
+        <dl class="flex mt-6">
+          <div class="flex flex-col-reverse">
+            <dt class="text-sm font-medium text-gray-400">Event Id</dt>
+            <dd class="text-xs text-gray-300"><%= message.headers["eventId"] %></dd>
+          </div>
+
+          <div class="flex flex-col-reverse ml-3 sm:ml-6">
+            <dt class="text-sm font-medium text-gray-400">Timestamp</dt>
+            <dd class="text-xs text-gray-300"><%= message.headers["timestamp"] %></dd>
+          </div>
+
+          <div class="flex flex-col-reverse ml-3 sm:ml-6">
+            <dt class="text-sm font-medium text-gray-400">Version</dt>
+            <dd class="text-xs text-gray-300"><%= message.headers["version"] %></dd>
+          </div>
+
+          <div class="flex flex-col-reverse ml-3 sm:ml-6">
+            <dt class="text-sm font-medium text-gray-400">Transaction Id</dt>
+            <dd class="text-xs text-gray-400">
+              <%= message.headers["transactionId"] %>
+            </dd>
+          </div>
+        </dl>
+      </div>
+      <div class="flex-shrink-0 ml-3">
+        <%= live_patch "Show Payload", to: Routes.event_index_path(@socket, :payload, payload: Jason.encode!(message.value)), class: "bg-indigo-500 hover:bg-indigo-700 text-gray-200 font-bold py-2 px-4 rounded" %>
+      </div>
+    </div>
+  </div>
+<% end %>
