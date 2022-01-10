@@ -1,6 +1,6 @@
 # KafkaUi
 
-This application is a helpful web application for listening, and showing Kafka events.
+This application is a helpful web application for listening to, and showing Kafka events.
 
 The application currently caches the last 200 Events in memory.
 The UI reactively renders incoming events.
