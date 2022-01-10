@@ -50,7 +50,14 @@ config :phoenix, :json_library, Jason
 config :kafka_ui, :elsa,
   group_consumer: [
     group: "game-events-ui",
-    topics: ["gameworld-created", "spacestation-created", "playerStatus", "bank-created"],
+    topics: [
+      "gameworld-created",
+      "playerStatus",
+      "bank-created",
+      "neighbours",
+      "spawn-notification",
+      "movement"
+    ],
     handler: KafkaUi.MessageHandler,
     handler_init_args: %{},
     config: [
